@@ -125,7 +125,7 @@ def get_original_arrays(root_path,type):
 def organize_data_pairs(origin_datas):
     ret_pairs=dict()
     data_meta = dict()
-    root_dir = '/opt/analyse_airway/'
+    root_dir = '/opt/artery_extraction/'
     if not os.path.exists('./output'):
         os.makedirs('./output')
     number=0
