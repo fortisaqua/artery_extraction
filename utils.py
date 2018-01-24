@@ -142,16 +142,16 @@ def organize_data_pairs(origin_datas):
                 if 'original' in data_name:
                     original_array = origin_datas[data_num][data_name]
                     original_array = np.float32(original_array<=0)*original_array
-                    original_img = ST.GetImageFromArray(np.transpose(original_array,[2,1,0]))
-                    ST.WriteImage(original_img,'./imgs/original_'+str(data_num)+'.vtk')
+                    # original_img = ST.GetImageFromArray(np.transpose(original_array,[2,1,0]))
+                    # ST.WriteImage(original_img,'./imgs/original_'+str(data_num)+'.vtk')
                     original_shape = np.shape(original_array)
                     if mask_shape[0]==original_shape[0] and mask_shape[1]==original_shape[1] and mask_shape[2]==original_shape[2]:
                         tempdict=dict()
                         tempdict[number]=dict()
                         tempdict[number]['original']=original_array
                         tempdict[number]['mask']=mask_array
-                        mask_img = ST.GetImageFromArray(np.transpose(mask_array,[2,1,0]))
-                        ST.WriteImage(mask_img,'./imgs/mask_'+str(data_num)+'.vtk')
+                        # mask_img = ST.GetImageFromArray(np.transpose(mask_array,[2,1,0]))
+                        # ST.WriteImage(mask_img,'./imgs/mask_'+str(data_num)+'.vtk')
                         tempdict[number]['name']=origin_datas[data_num]['name']
                         sio.savemat('./output/data' + str(number) + '.mat', {'original': tempdict[number]['original'],
                                                                              'mask': tempdict[number]['mask']})
