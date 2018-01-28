@@ -157,7 +157,10 @@ def organize_data_pairs(origin_datas):
                                                                              'mask': tempdict[number]['mask']})
                         data_meta[number] = root_dir + 'output/data' + str(number) + '.mat'
                         number+=1
-            tempdict.clear()
+                try:
+                    tempdict.clear()
+                except Exception,e:
+                    e_str = e
     pickle_writer = open('./data_meta.pkl', 'wb')
     pickle.dump(data_meta, pickle_writer)
     pickle_writer.close()
