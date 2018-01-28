@@ -1,10 +1,4 @@
-import sys
-import os
-import numpy as np
-import SimpleITK as ST
 import utils as ut
-import cPickle as pickle
-import scipy.io as sio
 
 
 root_dir='/opt/Multi-Task-data-process/multi_task_data_train'
