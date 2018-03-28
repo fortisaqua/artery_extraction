@@ -3,11 +3,15 @@ import scipy.io as sio
 import SimpleITK as ST
 import os
 
-if not os.path.exists("./vtks"):
-    os.mkdir("./vtks")
+output_root = "./vtks_multi"
+if not os.path.exists(output_root):
+    os.mkdir(output_root)
 names = ['original','mask']
-data_sample = sio.loadmat("./output/data1.mat")
-for name in names:
-    img = ST.GetImageFromArray(np.transpose(data_sample[name],[2,1,0]))
-    ST.WriteImage(img,"./vtks/"+name+".vtk")
+data_sample = sio.loadmat("./output_multi/data_1.mat")
+for name,data in data_sample.items():
+    try:
+        img = ST.GetImageFromArray(np.transpose(data_sample[name],[2,1,0]))
+        ST.WriteImage(img,output_root+ "/" +name+".vtk")
+    except Exception,e:
+        print ""
 print "over"
