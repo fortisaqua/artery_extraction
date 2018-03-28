@@ -141,7 +141,7 @@ def organize_data_pairs(origin_datas):
                 # check if this original data array has the same shape with the mask array
                 if 'original' in data_name:
                     original_array = origin_datas[data_num][data_name]
-                    original_array = np.float32(original_array<=0)*original_array
+                    # original_array = np.float32(original_array<=0)*original_array
                     # original_img = ST.GetImageFromArray(np.transpose(original_array,[2,1,0]))
                     # ST.WriteImage(original_img,'./imgs/original_'+str(data_num)+'.vtk')
                     original_shape = np.shape(original_array)
