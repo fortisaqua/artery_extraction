@@ -51,3 +51,6 @@ for patient_dir in os.listdir(root_dir):
     print ""
 for num,loc in data_meta.items():
     print num," ",loc
+pickle_writer = open('./data_meta_multi.pkl', 'wb')
+pickle.dump(data_meta, pickle_writer)
+pickle_writer.close()
