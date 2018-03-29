@@ -125,9 +125,10 @@ def get_original_arrays(root_path,type):
 def organize_data_pairs(origin_datas):
     ret_pairs=dict()
     data_meta = dict()
+    output_dir = "./output_airway"
     root_dir = '/opt/artery_extraction/'
-    if not os.path.exists('./output'):
-        os.makedirs('./output')
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
     number=0
     mask_type = origin_datas['mask_type']
     for data_num in origin_datas.keys():
@@ -153,9 +154,9 @@ def organize_data_pairs(origin_datas):
                         # mask_img = ST.GetImageFromArray(np.transpose(mask_array,[2,1,0]))
                         # ST.WriteImage(mask_img,'./imgs/mask_'+str(data_num)+'.vtk')
                         tempdict[number]['name']=origin_datas[data_num]['name']
-                        sio.savemat('./output/data' + str(number) + '.mat', {'original': tempdict[number]['original'],
+                        sio.savemat(output_dir+'/data' + str(number) + '.mat', {'original': tempdict[number]['original'],
                                                                              'mask': tempdict[number]['mask']})
-                        data_meta[number] = root_dir + 'output/data' + str(number) + '.mat'
+                        data_meta[number] = root_dir + output_dir + '/data' + str(number) + '.mat'
                         number+=1
                 try:
                     tempdict.clear()
