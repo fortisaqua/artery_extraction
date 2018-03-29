@@ -2,7 +2,7 @@ import utils as ut
 
 
 root_dir='/opt/Multi-Task-data-process/multi_task_data_train'
-type = 'artery'
+type = 'airway'
 
 if __name__ == '__main__' :
     origin_datas = ut.get_original_arrays(root_dir,type)
