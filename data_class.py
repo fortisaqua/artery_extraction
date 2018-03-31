@@ -35,7 +35,13 @@ class Data:
             os.makedirs("./" + self.output_loc)
         output_dir = root_dir + "/" + self.output_loc
         output_name = output_dir + "/data_" + str(self.number) + ".mat"
-        sio.savemat(output_name,{name : self.imgs[name] for name in self.names})
+        output_dict = {}
+        for name, data in self.imgs.items():
+            if "origin" in name:
+                output_dict["original"] = data
+            else:
+                output_dict[name] = data
+        sio.savemat(output_name,output_dict)
         return output_name
 
     def output_specific(self,type):
@@ -54,6 +60,7 @@ class Data:
         sio.savemat(output_name, output_dict)
         return output_name
 
+# usage : python data_class.py datadir mode [specific mask name if mode is "mask"]
 if __name__ == "__main__":
     root_dir=sys.argv[1]
     mode = sys.argv[2]
