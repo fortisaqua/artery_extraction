@@ -30,6 +30,7 @@ class Data:
             self.names.append(sub_dir)
 
     def output(self):
+        mask_names=["airway","artery"]
         root_dir = os.getcwd()
         if not os.path.exists("./" + self.output_loc):
             os.makedirs("./" + self.output_loc)
@@ -39,8 +40,12 @@ class Data:
         for name, data in self.imgs.items():
             if "origin" in name:
                 output_dict["original"] = data
-            else:
+            elif name in mask_names:
                 output_dict[name] = data
+        # exclude specific confusion area between airway and artery
+        commen_mask = output_dict["airway"]*output_dict["artery"]
+        output_dict["airway"] -= commen_mask
+        output_dict["artery"] -= commen_mask
         sio.savemat(output_name,output_dict)
         return output_name
 
