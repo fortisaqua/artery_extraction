@@ -59,6 +59,8 @@ class Data:
         output_dict = {}
         for name,data in self.imgs.items():
             if "origin" in name:
+                if "airway" in type:
+                    data = np.int16(data < 0) * data
                 output_dict["original"] = data
             if type in name:
                 output_dict["mask"] = data

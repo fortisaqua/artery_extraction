@@ -3,7 +3,7 @@ import scipy.io as sio
 import SimpleITK as ST
 import os
 
-data_type = "multi"
+data_type = "airway"
 output_root = "./vtks_"+data_type
 mat_dir = "./output_"+data_type+"/data_1.mat"
 if not os.path.exists(output_root):
