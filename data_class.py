@@ -49,39 +49,33 @@ class Data:
         sio.savemat(output_name,output_dict)
         return output_name
 
-    def output_specific(self,type,threshold):
+    def output_specific(self, type):
         root_dir = os.getcwd()
         self.output_loc = "output_"+type
         if not os.path.exists("./" + self.output_loc):
             os.makedirs("./" + self.output_loc)
         output_dir = root_dir + "/" + self.output_loc
-        output_name = output_dir + "/data_" + str(self.number) + "_"+str(threshold)+".mat"
+        output_name = output_dir + "/data_" + str(self.number) + ".mat"
         output_dict = {}
         for name,data in self.imgs.items():
             if "origin" in name:
-                if "airway" in type:
-                    data = np.int16(data < threshold) * data
-                if "artery" in type:
-                    data = np.int16(data > threshold) * data
                 output_dict["original"] = data
             if type in name:
                 output_dict["mask"] = data
         sio.savemat(output_name, output_dict)
         return output_name
 
-# usage : python data_class.py datadir mode [specific mask name if mode is "mask"] [threshold]
+# usage : python data_class.py datadir mode [specific mask name if mode is "mask"]
 if __name__ == "__main__":
     root_dir=sys.argv[1]
     mode = sys.argv[2]
     data_meta = dict()
     type = ""
-    threshold = 0
     output_file = './data_meta_'+mode+'.pkl'
     if mode == "mask":
         try:
             type = sys.argv[3]
-            threshold = int(sys.argv[4])
-            output_file = './data_meta_'+type+'_'+str(threshold)+'.pkl'
+            output_file = './data_meta_'+type+'.pkl'
         except Exception,e:
             type = ""
     if mode == "multi_class":
@@ -96,7 +90,7 @@ if __name__ == "__main__":
         data = Data(root_dir+'/'+patient_dir,number)
         data.load_data()
         if mode == "mask":
-            data_meta[number] = data.output_specific(type,threshold)
+            data_meta[number] = data.output_specific(type)
         else:
             data_meta[number] = data.output()
         del data
